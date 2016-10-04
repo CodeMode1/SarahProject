@@ -26,9 +26,14 @@ import { Component } from "@angular/core";
             padding: 0 0 8% 0;
         }
 
+        .row{
+            margin-left:0;
+            margin-right:0;
+        }
+
         nav{
             background-color: white;
-            padding:1%;
+            padding:1% 0 1% 0;
             clear:both;
             float:left;
             width:100%;

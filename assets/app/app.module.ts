@@ -6,8 +6,8 @@ import { provide } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent }   from './app.component';
-import { HeaderComponent } from './header.component';
-import { LogoComponent } from './header.logo.component';
+import { HeaderComponent } from './header/header.component';
+import { LogoComponent } from './header/header.logo.component';
 
 @NgModule({
 declarations: [AppComponent, HeaderComponent, LogoComponent], 
