@@ -24,6 +24,7 @@ import { Component } from "@angular/core";
             margin-top: 0px;
             background-color: #A2B5CD;
             padding: 0 0 8% 0;
+            position:relative;
         }
 
         .row{
@@ -67,6 +68,11 @@ import { Component } from "@angular/core";
         .router-link-active {
             background-color: #337ab7;
             color: white;
+        }
+
+        .my-login{
+            position:absolute;
+            bottom:0;
         }
     `]
 })
