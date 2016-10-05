@@ -24,8 +24,16 @@ import { AuthService } from './auth/auth.service';
 import { ErrorComponent } from './errors/error.component';
 import { ErrorService } from './errors/error.service';
 
+//client
+import { ClientComponent } from './clients/client.component';
+import { ClientsComponent } from './clients/clients.component';
+import { CreerClientComponent } from './clients/client-creer.component';
+import { ClientWidgetsComponent } from './clients/client-widgets.component';
+import { ClientListComponent } from './clients/client-list.component';
+
 @NgModule({
-declarations: [AppComponent, HeaderComponent, LogoComponent, LoginComponent, HomeComponent, SigninComponent, LogoutComponent, SignupComponent, AuthComponent, ErrorComponent], 
+declarations: [AppComponent, HeaderComponent, LogoComponent, LoginComponent, HomeComponent, SigninComponent, LogoutComponent, 
+    SignupComponent, AuthComponent, ErrorComponent, ClientComponent, ClientsComponent, CreerClientComponent, ClientWidgetsComponent, ClientListComponent], 
 imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule, routing],
 bootstrap: [AppComponent],
 providers: [provide(LocationStrategy, {useClass: HashLocationStrategy}), AuthService, ErrorService]

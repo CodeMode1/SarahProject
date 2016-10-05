@@ -10,9 +10,6 @@ import { Component } from '@angular/core';
         <my-error></my-error> 
     `,
     styles:[`
-        *{
-            margin:0;
-        }
     `]
 })
 export class AppComponent {

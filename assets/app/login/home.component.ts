@@ -43,7 +43,7 @@ import { Component, OnInit } from '@angular/core';
             margin:0;
             text-align:center;
             padding:2% 0 2% 0;
-            background-color:#4c4c4c;
+            background-color: #A2B5CD;
             width:100%;
         }
 
@@ -52,7 +52,7 @@ import { Component, OnInit } from '@angular/core';
         }
 
         .white{
-            color:white;
+            color:black;
         }
 
         .row{
@@ -61,6 +61,7 @@ import { Component, OnInit } from '@angular/core';
     `]
 })
 export class HomeComponent implements OnInit {
+    //background-color:#4c4c4c;
     title: string = "Système Abordable de Réservation et Agenda";
     nouvelles: string = "Nouvelles";
     constructor() { }

@@ -53,10 +53,10 @@ router.post('/signin', function(req, res, next){
                 error: {message: 'password invalide'}
             });
         }
-        //generate a token and return it to the client (using a 3rd party package to generate encrypted token : jsonwebtoken) npm install --save jsonwebtoken
-        //define valid duration, payload 
-        // first arg: payload => what we want to send (user) sec arg: key to check validity of token client side
-        var token = jwt.sign({admin: doc}, 'secret', {expiresIn: 7200});
+        /* generate a token and return it to the client (using a 3rd party package to generate encrypted token : jsonwebtoken)
+           payload: => sending back admin, secret key for validity, token expiration (4 hours)
+        */
+        var token = jwt.sign({admin: doc}, 'secret', {expiresIn: 14400});
         res.status(200).json({
             message: 'Success',
             token: token,

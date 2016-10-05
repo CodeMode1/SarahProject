@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Admin } from '../users/admin';
 import { AuthService } from './auth.service'; 
 import { ErrorService } from '../errors/error.service';
+import { Router } from '@angular/router';
 
 @Component({
     moduleId: module.id,
@@ -34,7 +35,8 @@ import { ErrorService } from '../errors/error.service';
 export class SignupComponent implements OnInit {
     signupForm: FormGroup;
     
-    constructor(private _formBuilder: FormBuilder, private _authService: AuthService, private _errorService: ErrorService) { }
+    constructor(private _formBuilder: FormBuilder, private _authService: AuthService, 
+        private _errorService: ErrorService, private _router: Router) { }
 
     ngOnInit() {
         this.signupForm = this._formBuilder.group({
@@ -56,7 +58,10 @@ export class SignupComponent implements OnInit {
          console.log('sign up: ' + admin.courriel + admin.password + admin.prenom + admin.nom);
          this._authService.signUp(admin)
              .subscribe(
-                 data => console.log(data),
+                 data => { 
+                     console.log(data);
+                     alert('Membre sauvegarder: ' + <Admin>(data.obj.prenom) + " " + <Admin>(data.obj.nom));
+                },
                  error => this._errorService.handleError(error)
              );
      }

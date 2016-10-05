@@ -1,0 +1,16 @@
+in list
+
+<!--todo later: filter pipe numero client embed pipe -->
+
+<!-- bouton creer copie, modifier, supprim, search bar (WIDGET COMPONENT EMBED)-->
+<li role="presentation"><a [routerLink]="['creer']">Creer</a></li>
+
+
+<!-- liste (table tape html ici) 
+ chaque client est une row ( affiche individuellemet pour tous les messages du array )
+ ici la table a le head de defini et on demande au client (row) de safficher
+ <head>
+<tbody>
+ <my-client *ngFor="let client of client" [client]="client" (editClicked)="message.content = $event"></my-client>
+ <tbody>
+-->

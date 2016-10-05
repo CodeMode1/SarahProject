@@ -8,12 +8,12 @@ import { AuthService } from '../auth/auth.service';
             <div class="col-md-12">
                 <my-logo></my-logo>
             </div>
-            <nav class="col-md-12">
+            <nav class="col-md-12" *ngIf="!estLogIn()">
                 <ul class="nav nav-pills">
-                    <li *ngIf="estLogIn()"><a>Agenda</a></li>
-                    <li *ngIf="estLogIn()"><a>Clients</a></li>
-                    <li *ngIf="estLogIn()"><a>Évènements</a></li>
-                    <li *ngIf="estLogIn()"><a>Ressources</a></li>
+                    <li><a>Agenda</a></li>
+                    <li><a [routerLink]="['/clients']" routerLinkActive="router-link-active">Clients</a></li>
+                    <li><a>Évènements</a></li>
+                    <li><a>Ressources</a></li>
                 </ul>
             </nav>
         </header>
@@ -21,11 +21,10 @@ import { AuthService } from '../auth/auth.service';
     styles: [`
         header {
             width: auto;
-            height: auto;
+            height:auto;
             margin-top: 0px;
-            background-color: #A2B5CD;
-            padding: 0 0 8% 0;
-            position:relative;
+            padding: 0 0 0 0;
+            background-color: #d7e1ee;
         }
 
         .row{
@@ -66,7 +65,7 @@ import { AuthService } from '../auth/auth.service';
             padding: 0 3% 0 5%;
         }
         
-        .router-link-active {
+        .router-link-active{
             background-color: #337ab7;
             color: white;
         }
