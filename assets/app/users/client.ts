@@ -11,11 +11,12 @@ export class Client{
     tel: string;
     fax: string;
     cell: string;
+    adminNom: string;
     adminId: string;
     dateModif: Date;
     
     constructor(noCompte: string, courriel: string, clientId?: string, compagnie?:string, nom?: string, prenom?:string, adresse?: string, ville?:string,
-         codePostal?: string, tel?: string, fax?: string, cell?: string, adminId?: string, dateModif?: Date){
+         codePostal?: string, tel?: string, fax?: string, cell?: string, adminNom?:string, adminId?: string, dateModif?: Date){
         this.noCompte = noCompte;
         this.courriel = courriel;
         this.clientId = clientId;
@@ -28,7 +29,6 @@ export class Client{
         this.tel = tel;
         this.fax = fax;
         this.cell = cell;
-        this.adminId = adminId;
         this.dateModif = dateModif;
     }
 }

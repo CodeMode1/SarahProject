@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-//href="#down" 
 
 @Component({
     moduleId: module.id,
@@ -8,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
     template: `
         <div class="jumbotron col-md-12">
             <h2>{{title}}</h2>
-            <p><a class="btn btn-primary btn-lg" role="button">Nouvelles</a></p>
+            <p><a class="btn btn-primary btn-lg" role="button" href="#down">Nouvelles</a></p>
         </div>
-        <div class="row col-md-12">
+        <section class="row col-md-12">
             <div class="container col-md-4">
                 <span class="glyphicon glyphicon-calendar white" aria-hidden="true"></span>
             </div>
@@ -20,7 +19,7 @@ import { Component, OnInit } from '@angular/core';
             <div class="container col-md-4">
                 <span class="glyphicon glyphicon-list-alt white" aria-hidden="true"></span>
             </div>
-        </div>
+        </section>
         <article id="down" class="jumbotron col-md-12">
             <h3>{{nouvelles}}</h3>
         </article>

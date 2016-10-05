@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
         <my-header></my-header>
         <my-login></my-login>
         <router-outlet></router-outlet>
+        <my-error></my-error> 
     `,
     styles:[`
         *{

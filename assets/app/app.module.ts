@@ -18,11 +18,16 @@ import { AuthComponent } from './auth/auth.component';
 import { SigninComponent } from './auth/signin.component';
 import { LogoutComponent } from './auth/logout.component';
 import { SignupComponent } from './auth/signup.component';
+import { AuthService } from './auth/auth.service';
+
+//errors
+import { ErrorComponent } from './errors/error.component';
+import { ErrorService } from './errors/error.service';
 
 @NgModule({
-declarations: [AppComponent, HeaderComponent, LogoComponent, LoginComponent, HomeComponent, SigninComponent, LogoutComponent, SignupComponent, AuthComponent], 
+declarations: [AppComponent, HeaderComponent, LogoComponent, LoginComponent, HomeComponent, SigninComponent, LogoutComponent, SignupComponent, AuthComponent, ErrorComponent], 
 imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule, routing],
 bootstrap: [AppComponent],
-providers: [provide(LocationStrategy, {useClass: HashLocationStrategy})]
+providers: [provide(LocationStrategy, {useClass: HashLocationStrategy}), AuthService, ErrorService]
 })
 export class AppModule {}

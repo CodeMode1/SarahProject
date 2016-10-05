@@ -5,8 +5,8 @@ import { Component, OnInit } from '@angular/core';
     selector: 'my-login',
     template: `
     <ul class="nav nav-tabs nav-justified">
-      <li role="presentation"><a [routerLink]="['']">Home</a></li>
-      <li role="presentation"><a [routerLink]="['/auth']" routerLinkActive="active">Login</a></li>
+      <li role="presentation"><a [routerLink]="['']"  routerLinkActive="active">Home</a></li>
+      <li role="presentation"><a [routerLink]="['/auth']">Login</a></li>
     </ul>
     `,
     styles:[`

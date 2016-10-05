@@ -8,11 +8,10 @@ var mongoose = require('mongoose');
 
 //getting the app routes
 var appRoutes = require('./routes/app');
-var userRoutes = require('./routes/users');
-
+var adminRoutes = require('./routes/admins');
 
 var app = express();
-mongoose.connect('localhost:27017/sarahdb');
+mongoose.connect('localhost:27017/sarahdb2');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +32,7 @@ app.use(function(req, res, next) {
 });
 
 //MIDDLEWARE: / redirects all requests, having /message before to redirect to messages.js
-app.use('/user', userRoutes);
+app.use('/admin', adminRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler

@@ -1,13 +1,12 @@
 export class Admin{
-    password:string;
     courriel:string;
+    password:string;
     prenom: string;
     nom: string;
 
-
-    constructor(password: string, courriel:string, prenom?: string, nom?: string){
-        this.password = password;
+    constructor(courriel: string, password:string, prenom?: string, nom?: string){
         this.courriel = courriel;
+        this.password = password;
         this.prenom = prenom;
         this.nom = nom;
     }

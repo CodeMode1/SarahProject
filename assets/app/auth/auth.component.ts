@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth.service';
 
 @Component({
     moduleId: module.id,
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
          <div class="row spacing">
             <nav class="col-md-8 col-md-offset-2">
                 <ul class="nav nav-tabs">
-                    <li routerLinkActive="router-link-active"><a [routerLink]="['signup']">Signup</a></li>
-                    <li routerLinkActive="router-link-active"><a [routerLink]="['signin']">Signin</a></li>
-                    <li routerLinkActive="router-link-active"><a [routerLink]="['logout']">Logout</a></li>
+                    <li routerLinkActive="router-link-active" *ngIf="!estLogIn()"><a [routerLink]="['signup']">Signup</a></li>
+                    <li routerLinkActive="router-link-active" *ngIf="!estLogIn()"><a [routerLink]="['signin']">Signin</a></li>
+                    <li routerLinkActive="router-link-active" *ngIf="estLogIn()"><a [routerLink]="['logout']">Logout</a></li>
                 </ul>
             </nav>
         </div>
@@ -18,7 +19,7 @@ import { Component, OnInit } from '@angular/core';
         </div>
     `,
     styles: [`
-        .router-link-active{
+        .router-link-active, a:active{
             color:#555;
             cursor: pointer;
             background-color: #fff;
@@ -26,10 +27,18 @@ import { Component, OnInit } from '@angular/core';
             border-bottom-color: transparent;
         }
 
+        a{
+            font-size: 1vw;
+        }
+
     `]
 })
 export class AuthComponent implements OnInit {
-    constructor() { }
+    constructor(private _authService: AuthService) { }
 
     ngOnInit() { }
+
+    estLogIn(){
+        return this._authService.estLogIn();
+    }
 }

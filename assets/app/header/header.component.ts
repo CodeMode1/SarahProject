@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from '../auth/auth.service';
 
 @Component({
     selector: 'my-header',
@@ -9,10 +10,10 @@ import { Component } from "@angular/core";
             </div>
             <nav class="col-md-12">
                 <ul class="nav nav-pills">
-                    <li><a>Agenda</a></li>
-                    <li><a>Clients</a></li>
-                    <li><a>Évènements</a></li>
-                    <li><a>Ressources</a></li>
+                    <li *ngIf="estLogIn()"><a>Agenda</a></li>
+                    <li *ngIf="estLogIn()"><a>Clients</a></li>
+                    <li *ngIf="estLogIn()"><a>Évènements</a></li>
+                    <li *ngIf="estLogIn()"><a>Ressources</a></li>
                 </ul>
             </nav>
         </header>
@@ -76,6 +77,17 @@ import { Component } from "@angular/core";
         }
     `]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
     title: string = "Système abordable de réservation et agenda";
+
+    constructor(private _authService: AuthService){
+
+    }
+
+    ngOnInit(){
+    }
+
+    estLogIn(){
+        return this._authService.estLogIn();
+    }
 }
