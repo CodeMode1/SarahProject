@@ -8,7 +8,7 @@ import { AuthService } from '../auth/auth.service';
             <div class="col-md-12">
                 <my-logo></my-logo>
             </div>
-            <nav class="col-md-12" *ngIf="!estLogIn()">
+            <nav class="col-md-12" *ngIf="estLogIn()">
                 <ul class="nav nav-pills">
                     <li><a>Agenda</a></li>
                     <li><a [routerLink]="['/clients']" routerLinkActive="router-link-active">Clients</a></li>

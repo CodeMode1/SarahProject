@@ -30,12 +30,13 @@ import { ClientsComponent } from './clients/clients.component';
 import { CreerClientComponent } from './clients/client-creer.component';
 import { ClientWidgetsComponent } from './clients/client-widgets.component';
 import { ClientListComponent } from './clients/client-list.component';
+import { ClientService } from './clients/client.service';
 
 @NgModule({
 declarations: [AppComponent, HeaderComponent, LogoComponent, LoginComponent, HomeComponent, SigninComponent, LogoutComponent, 
     SignupComponent, AuthComponent, ErrorComponent, ClientComponent, ClientsComponent, CreerClientComponent, ClientWidgetsComponent, ClientListComponent], 
 imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule, routing],
 bootstrap: [AppComponent],
-providers: [provide(LocationStrategy, {useClass: HashLocationStrategy}), AuthService, ErrorService]
+providers: [provide(LocationStrategy, {useClass: HashLocationStrategy}), AuthService, ErrorService, ClientService]
 })
 export class AppModule {}

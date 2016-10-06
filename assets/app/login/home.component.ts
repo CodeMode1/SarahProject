@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
     template: `
         <div class="jumbotron col-md-12">
             <h2>{{title}}</h2>
-            <p><a class="btn btn-primary btn-lg" role="button" href="#down">Nouvelles</a></p>
+            <p><a class="btn btn-primary btn-lg" role="button" href="#nouvelles">Nouvelles</a></p>
         </div>
         <section class="row col-md-12">
             <div class="container col-md-4">
@@ -20,7 +20,7 @@ import { Component, OnInit } from '@angular/core';
                 <span class="glyphicon glyphicon-list-alt white" aria-hidden="true"></span>
             </div>
         </section>
-        <article id="down" class="jumbotron col-md-12">
+        <article id="nouvelles" class="jumbotron col-md-12">
             <h3>{{nouvelles}}</h3>
         </article>
     `,

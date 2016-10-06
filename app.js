@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 //getting the app routes
 var appRoutes = require('./routes/app');
 var adminRoutes = require('./routes/admins');
+var clientRoutes = require('./routes/clients')
 
 var app = express();
 mongoose.connect('localhost:27017/sarahdb2');
@@ -33,6 +34,7 @@ app.use(function(req, res, next) {
 
 //MIDDLEWARE: / redirects all requests, having /message before to redirect to messages.js
 app.use('/admin', adminRoutes);
+app.use('/client', clientRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler

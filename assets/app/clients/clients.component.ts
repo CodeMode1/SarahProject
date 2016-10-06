@@ -6,14 +6,13 @@ import { Component, OnInit } from '@angular/core';
     template: `
         <section>
             <div class="row">
-                in clients
                 <router-outlet></router-outlet>
             </div>
         </section>
     `,
     styles: [`
         section{
-            padding-left:5%;
+            padding-left:2%;
         }
     `]
 })
