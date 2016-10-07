@@ -7,7 +7,7 @@
         </row>
     </div>
     <div class="panel-heading">
-        <h4>{{titre}}</h4>
+        <h3>{{titre}}</h3>
     </div>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -33,18 +33,21 @@
                 <tr *ngFor="let client of clients; let i=index">
                     <td>{{i + 1}}</td>
                     <td>{{client?.noCompte}}</td>
-                    <td>{{client?.compagnie}}</td>
-                    <td>{{client?.prenom}}</td>
-                    <td>{{client?.nom}}</td>
+                    <td>{{client?.compagnie | capitalize}}</td>
+                    <td>{{client?.prenom | capitalize}}</td>
+                    <td>{{client?.nom | capitalize}}</td>
                     <td>{{client?.cell}}</td>
                     <td>{{client?.courriel}}</td>
-                    <td>{{client?.adresse}}</td>
-                    <td>{{client?.ville}}</td>
-                    <td>{{client?.codePostal}}</td>
+                    <td>{{client?.adresse | capitalize}}</td>
+                    <td>{{client?.ville | capitalize}}</td>
+                    <td>{{client?.codePostal | capitalize}}</td>
                     <td>{{client?.telPrincipal}}</td>
                     <td>{{client?.fax}}</td>
-                    <td>{{client?.creerPar}}</td>
-                    <td>{{client?.dateCree}}</td>
+                    <td>{{client?.creerPar | capitalize}}</td>
+                    <td>{{client?.dateCree | date:'yyyy-MM-dd HH:mm'}}</td>
+                </tr>
+                <tr *ngIf="!clients || !clients.length">
+                    <td class="bg-danger" colspan="14">Aucuns clients</td>
                 </tr>
             </tbody>
         </table>
