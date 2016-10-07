@@ -1,4 +1,63 @@
-in list
+<section>
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <row>
+            <p class="col-md-2">Rechercher par Numéro de Client: </p>
+            <input type="text" class="col-md-4">
+        </row>
+    </div>
+    <div class="panel-heading">
+        <h4>{{titre}}</h4>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>NO COMPTE</th>
+                    <th>COMPAGNIE</th>
+                    <th>PRÉNOM</th>
+                    <th>NOM</th>
+                    <th>CELLULAIRE</th>
+                    <th>COURRIEL</th> 
+                    <th>ADRESSE</th>
+                    <th>VILLE</th>
+                    <th>CODE POSTAL</th>
+                    <th>TÉL PRINCIPAL</th>
+                    <th>FAX</th>
+                    <th>CRÉÉ PAR</th>
+                    <th>CRÉÉ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let client of clients; let i=index">
+                    <td>{{i + 1}}</td>
+                    <td>{{client?.noCompte}}</td>
+                    <td>{{client?.compagnie}}</td>
+                    <td>{{client?.prenom}}</td>
+                    <td>{{client?.nom}}</td>
+                    <td>{{client?.cell}}</td>
+                    <td>{{client?.courriel}}</td>
+                    <td>{{client?.adresse}}</td>
+                    <td>{{client?.ville}}</td>
+                    <td>{{client?.codePostal}}</td>
+                    <td>{{client?.telPrincipal}}</td>
+                    <td>{{client?.fax}}</td>
+                    <td>{{client?.creerPar}}</td>
+                    <td>{{client?.dateCree}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</section>
+
+
+
+
+
+
+
 
 <!--todo later: filter pipe numero client embed pipe -->
 

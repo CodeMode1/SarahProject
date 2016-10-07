@@ -4,10 +4,28 @@ var jwt = require('jsonwebtoken');
 var Admin = require('../models/admin');
 var Client = require('../models/client');
 
+router.get('/', function(req, res, next){
+    var getClients = Client.find();
+
+    getClients.sort({ dateCree: 'desc'})
+        .limit(10)
+        .exec(function(err, results){
+            if(err){
+                return res.status(404).json({
+                    title: 'erreur produite',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'succès',
+                obj: results
+            });
+        });
+});
 
 
-/* middleware : requêtes voyagent de haut en bas.
-   seulement un Admin loggué peut créer, modifier et supprimer des clients
+/* middleware : requêtes voyagent de haut en bas. ( defensive programming)
+   seulement un Admin loggué peut voir, créer, modifier et supprimer des clients
 */
 router.use('/', function(req, res, next){
     jwt.verify(req.query.token, 'secret', function(err, jwtDecode){

@@ -11,8 +11,9 @@ import { Component, OnInit } from '@angular/core';
         </section>
     `,
     styles: [`
-        section{
-            padding-left:2%;
+        section, .row{
+            padding:0;
+            margin:0;
         }
     `]
 })

@@ -22,6 +22,16 @@ export class ClientService {
                 data.pays, data.fax, data.telSecondaire, data.creerPar);
                 return client;
             })
-            .catch(error => Observable.throw(error.json() || 'server error'));
+            .catch(error => Observable.throw(error.json() || 'erreur serveur'));
+    }
+
+    getClients(): Observable<Client[]>{
+        return this._http.get('http://localhost:3000/client')
+            .map((response: Response) => <Client[]>response.json().obj)
+                .do( data => {
+                    this.clients = data;
+                    console.log('les clients: ' + JSON.stringify(data));
+                })
+                .catch(error => Observable.throw(error.json() || 'erreur serveur'));
     }
 }

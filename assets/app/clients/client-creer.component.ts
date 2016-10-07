@@ -8,6 +8,7 @@ import { ErrorService } from '../errors/error.service';
     moduleId: module.id,
     selector: 'my-creer-client',
     template:`
+
     <section class="col-md-12">
         <div class="col-md-4 title">
             <h2>{{identification}}</h2>
@@ -18,7 +19,7 @@ import { ErrorService } from '../errors/error.service';
             <h2>{{gestion}}</h2>
         </div>
     </section>
-    <section>
+    <section class="col-md-12">
         <form [formGroup]="creerClientForm" (ngSubmit)="onSubmit()">
             <div class="col-md-4 outer">
                 <div class="col-md-2 form-group">
@@ -111,7 +112,8 @@ import { ErrorService } from '../errors/error.service';
                 </div>
             </div>
         </form>
-    </section>   
+    </section>
+
     `,
     styles: [`
         .outer{
@@ -119,6 +121,7 @@ import { ErrorService } from '../errors/error.service';
             clear:both;
             padding: 0 0 1% 0;
         }
+        
         .form-group{
             float:left;
             width:50%;
@@ -137,8 +140,8 @@ import { ErrorService } from '../errors/error.service';
             margin: 0 auto;
         }
 
-        .col-md-12{
-            padding: 2% 0 2% 0;
+        .col-md-12 {
+            padding: 2%;
         }
 
         h2{
@@ -150,6 +153,7 @@ import { ErrorService } from '../errors/error.service';
             text-align:left;
         }
         
+
 
     `
     ]
@@ -178,6 +182,7 @@ export class CreerClientComponent implements OnInit {
             fax: [''],
             telSecondaire: ['']
         });
+
     }
 
      private estCourrielOK(control: FormControl): {[chaine: string]: boolean}{
