@@ -11,13 +11,13 @@ import { Component, OnInit } from '@angular/core';
         </div>
         <section class="row col-md-12">
             <div class="container col-md-4">
-                <span class="glyphicon glyphicon-calendar white" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
             </div>
             <div class="container col-md-4">
-                <span class="glyphicon glyphicon-user white" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             </div>
             <div class="container col-md-4">
-                <span class="glyphicon glyphicon-list-alt white" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
             </div>
         </section>
         <article id="nouvelles" class="jumbotron col-md-12">
@@ -49,10 +49,6 @@ import { Component, OnInit } from '@angular/core';
 
         .glyphicon{
             font-size:2vw;
-        }
-
-        .white{
-            color:black;
         }
 
         .row{

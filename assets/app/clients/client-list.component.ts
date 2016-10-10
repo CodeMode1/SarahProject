@@ -35,6 +35,46 @@ import { CapitalizePipe } from '../pipes/capitalize.pipe';
             font-size: 1vw;
         }
 
+        #searchLabel{
+            margin-bottom:0;
+            text-align:left;
+        }
+
+        .size{
+            font-size:1vw;
+            text-align:center;
+        }
+
+        a{
+            text-decoration: none;
+            color: #000;
+            display: block;
+            clear: both;
+        }
+
+        a:hover{
+            color: #337ab7;
+        }
+
+        .widgets{
+            display: inline-block;
+            padding-right: 5%;
+        }
+
+        #specialSearch{
+            padding: 0;
+        }
+
+        .divFooter{
+            text-align:center;
+        }
+
+        .col-md-12 {
+            padding: 2%;
+        }
+
+
+
     
         
     `]

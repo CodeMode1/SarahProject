@@ -13,13 +13,13 @@ import { ErrorService } from '../errors/error.service';
             <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="courriel">Courriel</label>
-                    <input type="email" id="courriel" class="form-control" formControlName="courriel">
+                    <input type="email" id="courriel" class="form-control" formControlName="courriel" placeholder="my@email.com">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" formControlName="password">
+                    <input type="password" id="password" class="form-control" formControlName="password" placeholder="password">
                 </div>
-                <button type="submit" class="btn btn-primary" [disabled]="!signinForm.valid">Se loguer</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!signinForm.valid">Sign In</button>
             </form>
         </section>
     `

@@ -13,21 +13,21 @@ import { Router } from '@angular/router';
             <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" class="form-control" formControlName="prenom">
+                    <input type="text" id="prenom" class="form-control" formControlName="prenom" placeholder="firstname">
                 </div>
                 <div class="form-group">
                     <label for="nom">Nom</label>
-                    <input type="text" id="nom" class="form-control" formControlName="nom">
+                    <input type="text" id="nom" class="form-control" formControlName="nom" placeholder="name">
                 </div>
                 <div class="form-group">
                     <label for="courriel">Courriel</label>
-                    <input type="email" id="courriel" class="form-control" formControlName="courriel">
+                    <input type="email" id="courriel" class="form-control" formControlName="courriel" placeholder="my@email.com">
                 </div>
                 <div class="form-group">
                     <label for="password">Mot de Passe</label>
-                    <input type="password" id="password" class="form-control" formControlName="password">
+                    <input type="password" id="password" class="form-control" formControlName="password" placeholder="password">
                 </div>
-                <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">S'enregistrer</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">Sign Up</button>
             </form>
         </section>
     `
