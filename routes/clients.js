@@ -23,6 +23,23 @@ router.get('/', function(req, res, next){
         });
 });
 
+router.get('/adminLogue', function(req, res, next){
+    var jwtDecode = jwt.decode(req.query.token);
+
+     Admin.findById(jwtDecode.admin._id, function(err, doc){
+         if(err){
+            return res.status(404).json({
+                title: 'erreur produite',
+                error: err
+            });
+         }
+        res.status(200).json({
+            message: 'succès',
+            obj: doc
+        });
+    });
+});
+
 
 /* middleware : requêtes voyagent de haut en bas. ( defensive programming)
    seulement un Admin loggué peut voir, créer, modifier et supprimer des clients
@@ -40,6 +57,7 @@ router.use('/', function(req, res, next){
     });
 });
 
+        
 /* créer des clients
 */ 
 

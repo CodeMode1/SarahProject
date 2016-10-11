@@ -3,6 +3,7 @@ import { ClientService } from './client.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Client } from './client';
 import { ErrorService } from '../errors/error.service';
+import { Admin } from '../users/admin';
 
 @Component({
     moduleId: module.id,
@@ -112,23 +113,23 @@ import { ErrorService } from '../errors/error.service';
                     </div>
                     <div class="col-md-12 gestionInputs">
                         <label for="modifPar">Modifié par</label>
-                        <input type="text" id="modifPar" class="form-control" formControlName="modifPar">
+                        <input type="text" id="modifPar" class="form-control" formControlName="modifPar" readonly>
                     </div>
                     <div class="col-md-12 gestionInputs">
                         <label for="modif">Modifié</label>
-                        <input type="text" id="modif" class="form-control" formControlName="modif">
+                        <input type="text" id="modif" class="form-control" formControlName="modif" readonly>
                     </div>
                     <div class="col-md-12 gestionInputs">
                         <label for="creePar">Créé par</label>
-                        <input type="text" id="creePar" class="form-control" formControlName="creePar">
+                        <input type="text" id="creePar" class="form-control" formControlName="creePar" readonly [ngModel]="this.adminFullNom">
                     </div>
                     <div class="col-md-12 gestionInputs">
                         <label for="cree">Créé</label>
-                        <input type="text" id="cree" class="form-control" formControlName="cree">
+                        <input type="text" id="cree" class="form-control" formControlName="cree" readonly [ngModel]="this.date">
                     </div>
                     <div class="col-md-12 gestionInputs">
                         <label for="dateDernEv">Date Dernier Évènement</label>
-                        <input type="text" id="dateDernEv" class="form-control" formControlName="dateDernEv">
+                        <input type="text" id="dateDernEv" class="form-control" formControlName="dateDernEv" readonly>
                     </div>
                     <div class="col-md-12 gestionInputs">
                         <label for="selectStatut">Satut du client</label>
@@ -142,7 +143,7 @@ import { ErrorService } from '../errors/error.service';
                         </select>
                     </div>
                     <div class="col-md-12 gestionInputs">
-                        <label for="selectSource">Satut du client</label>
+                        <label for="selectSource">Source</label>
                         <select class="form-control" id="selectSource" formControlName="selectSource">
                             <option>Internet</option>
                             <option>Bouche-à-oreille</option>
@@ -233,11 +234,6 @@ import { ErrorService } from '../errors/error.service';
         .dropdown{
             padding:0;
         }
-
-
-        
-
-
     `
     ]
 })
@@ -245,23 +241,27 @@ export class CreerClientComponent implements OnInit {
     identification: string = "Identification";
     gestion: string = "Gestion";
     creerClientForm: FormGroup;
+    adminFullNom: string;
+    date: string;
 
-    constructor(private _formBuilder: FormBuilder, private _clientService: ClientService, private _errorService: ErrorService) { }
+    constructor(private _formBuilder: FormBuilder, private _clientService: ClientService, private _errorService: ErrorService) {
+        this.date = "";
+     }
 
     ngOnInit() { 
          this.creerClientForm = this._formBuilder.group({
-            prenom: ['', Validators.required],
+            prenom: [''],
             nom: ['', Validators.required],
-            noCompte: ['', Validators.required],
-            courriel: ['', [Validators.required, this.estCourrielOK]],
-            cell: ['', Validators.required],
-            compagnie: ['', Validators.required],
-            adresse: ['', Validators.required],
-            ville: ['', Validators.required],
-            codePostal: ['', Validators.required],
-            telPrincipal: ['', Validators.required],
-            province: ['', Validators.required],
-            pays: ['', Validators.required],
+            noCompte: [''],
+            courriel: ['',  this.estCourrielOK],
+            cell: [''],
+            compagnie: [''],
+            adresse: [''],
+            ville: [''],
+            codePostal: [''],
+            telPrincipal: [''],
+            province: [''],
+            pays: [''],
             fax: [''],
             telSecondaire: [''],
             noExTaxeProv: [''],
@@ -274,6 +274,8 @@ export class CreerClientComponent implements OnInit {
             selectStatut: [''],
             selectSource: ['']
         });
+
+        this.getCreePar();
 
     }
 
@@ -299,5 +301,37 @@ export class CreerClientComponent implements OnInit {
             },
                 error => this._errorService.handleError(error)
             );
+        
+        this.date = this.toDateString(new Date()).slice(0,16);
+    }
+
+    getCreePar(){
+        //var monObjet_json = localStorage.getItem("token");
+        //var monObjet = JSON.parse(monObjet_json);
+        //console.log(monObjet);
+        //this.admin = <Admin>JSON.parse(localStorage.getItem('admin'));
+        //this.adminFullNom = this.admin.nom;
+
+        //var monObjet_json = localStorage.getItem('token');
+        //var monObg = JSON.parse(monObjet_json);
+        //console.log(monObg);
+
+        this._clientService.getAdminLoggue().subscribe(
+            data => { 
+                var admin: Admin;
+                admin = data;
+                this.adminFullNom = admin.prenom +  " " + admin.nom;
+                console.log(admin);
+            },
+            error => this._errorService.handleError(error)
+        );
+    }
+
+    private toDateString(date: Date): string {
+        return (date.getFullYear().toString() + '-' 
+           + ("0" + (date.getMonth() + 1)).slice(-2) + '-' 
+           + ("0" + (date.getDate())).slice(-2)) + " "
+           + date.toTimeString().slice(0,5);
+
     }
 }
