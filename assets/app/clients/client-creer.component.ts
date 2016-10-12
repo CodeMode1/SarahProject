@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClientService } from './client.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Client } from './client';
 import { ErrorService } from '../errors/error.service';
 import { Admin } from '../users/admin';
+
+interface ResultatValidation {
+    [cle: string]: boolean;
+}
 
 @Component({
     moduleId: module.id,
@@ -18,7 +22,7 @@ import { Admin } from '../users/admin';
                 <div class="col-md-12 outer">
                     <div class="col-md-6 form-group">
                         <label for="prenom">Prénom</label>
-                        <input type="text" id="prenom" class="form-control" formControlName="prenom" placeholder="firstname">
+                        <input type="text" id="prenom" class="form-control" formControlName="prenom" placeholder="firstname" [(ngModel)]="this.myClient.prenom">
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="nom">Nom</label>
@@ -28,7 +32,7 @@ import { Admin } from '../users/admin';
                 <div class="col-md-12 outer">
                     <div class="col-md-6 form-group">
                         <label for="noCompte">No Compte</label>
-                        <input type="text" id="noCompte" class="form-control" formControlName="noCompte" placeholder="account #">
+                        <input type="text" id="noCompte" class="form-control" formControlName="noCompte" placeholder="account #" [(ngModel)]="this.myClient.noCompte">
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="courriel">Courriel</label>
@@ -38,51 +42,54 @@ import { Admin } from '../users/admin';
                 <div class="col-md-12 outer">
                     <div class="col-md-6 form-group">
                         <label for="cell">Cellulaire</label>
-                        <input type="text" id="cell" class="form-control" formControlName="cell" placeholder="cell #">
+                        <input type="text" id="cell" class="form-control" formControlName="cell" placeholder="cell #" [(ngModel)]="this.myClient.cell">
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="compagnie">Compagnie</label>
-                        <input type="text" id="compagnie" class="form-control" formControlName="compagnie" placeholder="business">
+                        <input type="text" id="compagnie" class="form-control" formControlName="compagnie" placeholder="business" [(ngModel)]="this.myClient.compagnie">
                     </div>
                 </div>
                 <div class="col-md-12 outer">
                     <div class="col-md-6 form-group">
                         <label for="adresse">Adresse</label>
-                        <input type="text" id="adresse" class="form-control" formControlName="adresse" placeholder="adress">
+                        <input type="text" id="adresse" class="form-control" formControlName="adresse" placeholder="adress" [(ngModel)]="this.myClient.adresse">
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="ville">Ville</label>
-                        <input type="text" id="ville" class="form-control" formControlName="ville" placeholder="city">
+                        <input type="text" id="ville" class="form-control" formControlName="ville" placeholder="city" [(ngModel)]="this.myClient.ville">
                     </div>
                 </div>
                 <div class="col-md-12 outer">
                     <div class="col-md-6 form-group">
                         <label for="codePostal">Code Postal</label>
-                        <input type="text" id="codePostal" class="form-control" formControlName="codePostal" placeholder="postal code">
+                        <input type="text" #inputCP (keyup)="formatCP(inputCP)" id="codePostal" class="form-control" formControlName="codePostal" placeholder="postal code" [(ngModel)]="this.myClient.codePostal">
+                        <p class="text-danger" [hidden]="creerClientForm.controls.codePostal.valid || (creerClientForm.controls.codePostal.pristine)">
+                            Invalide. D, F, I, O, Q U, W, Z Invalide. Example: H2S 0B5.
+                        </p>
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="telPrincipal">Tél. Principal</label>
-                        <input type="text" id="telPrincipal" class="form-control" formControlName="telPrincipal" placeholder="main #">
+                        <input type="text" id="telPrincipal" class="form-control" formControlName="telPrincipal" placeholder="main #" [(ngModel)]="this.myClient.telPrincipal">
                     </div>
                 </div>
                 <div class="col-md-12 outer">
                     <div class="col-md-6 form-group">
                         <label for="province">Province</label>
-                        <input type="text" id="province" class="form-control" formControlName="province" placeholder="province">
+                        <input type="text" id="province" class="form-control" formControlName="province" placeholder="province" [(ngModel)]="this.myClient.province">
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="pays">Pays</label>
-                        <input type="text" id="pays" class="form-control" formControlName="pays" placeholder="country">
+                        <input type="text" id="pays" class="form-control" formControlName="pays" placeholder="country" [(ngModel)]="this.myClient.pays">
                     </div>
                 </div>
                 <div class="col-md-12 outer">
                     <div class="col-md-6 form-group">
                         <label for="fax">Fax</label>
-                        <input type="text" id="fax" class="form-control" formControlName="fax" placeholder="fax #">
+                        <input type="text" id="fax" class="form-control" formControlName="fax" placeholder="fax #" [(ngModel)]="this.myClient.fax">
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="telSecondaire">Tél. Secondaire</label>
-                        <input type="text" id="telSecondaire" class="form-control" formControlName="telSecondaire" placeholder="second #">
+                        <input type="text" id="telSecondaire" class="form-control" formControlName="telSecondaire" placeholder="second #" [(ngModel)]="this.myClient.telSecondaire">
                     </div>
                 </div>
             </section>
@@ -95,25 +102,25 @@ import { Admin } from '../users/admin';
                 <div class="col-md-6 outer">
                     <div class="col-md-12 memo">
                         <label for="labelMemo">Mémo</label>
-                        <textarea id="labelMemo" class="form-control" rows="10" formControlName="memo"></textarea>
+                        <textarea id="labelMemo" class="form-control" rows="10" formControlName="memo" [(ngModel)]="this.myClient.memo"></textarea>
                     </div>
                     <div class="col-md-12 memo">
                         <label for="labelMess">Message important pour évènement à venir</label>
-                        <textarea id="labelMess" class="form-control" rows="10" formControlName="memoAVenir"></textarea>
+                        <textarea id="labelMess" class="form-control" rows="10" formControlName="memoAVenir" [(ngModel)]="this.myClient.memoAVenir"></textarea>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="col-md-12 gestionInputs">
                         <label for="noExTaxeProv">No exemption taxe provinciale</label>
-                        <input type="text" id="noExTaxeProv" class="form-control" formControlName="noExTaxeProv">
+                        <input type="text" id="noExTaxeProv" class="form-control" formControlName="noExTaxeProv" [(ngModel)]="this.myClient.noExTaxeProv">
                     </div>
                     <div class="col-md-12 gestionInputs">
-                        <label for="noExTaxeFéd">No exemption taxe fédérale</label>
-                        <input type="text" id="noExTaxeFéd" class="form-control" formControlName="noExTaxeFéd">
+                        <label for="noExTaxeFed">No exemption taxe fédérale</label>
+                        <input type="text" id="noExTaxeFed" class="form-control" formControlName="noExTaxeFed" [(ngModel)]="this.myClient.noExTaxeFed">
                     </div>
                     <div class="col-md-12 gestionInputs">
                         <label for="selectStatut">Satut du client</label>
-                        <select class="form-control" id="selectStatut" formControlName="selectStatut">
+                        <select class="form-control" id="selectStatut" formControlName="selectStatut" [(ngModel)]="this.myClient.selectStatut">
                             <option>Client passé</option>
                             <option>Client actuel</option>
                             <option>Client récurrent</option>
@@ -124,7 +131,7 @@ import { Admin } from '../users/admin';
                     </div>
                     <div class="col-md-12 gestionInputs">
                         <label for="selectSource">Source</label>
-                        <select class="form-control" id="selectSource" formControlName="selectSource">
+                        <select class="form-control" id="selectSource" formControlName="selectSource" [(ngModel)]="this.myClient.selectSource">
                             <option>Internet</option>
                             <option>Bouche-à-oreille</option>
                             <option>Journaux et Magazines</option>
@@ -135,15 +142,15 @@ import { Admin } from '../users/admin';
                     </div>     
                     <div class="col-md-12 gestionInputs">
                         <label for="modifPar">Modifié par</label>
-                        <input type="text" id="modifPar" class="form-control" formControlName="modifPar" readonly>
+                        <input type="text" id="modifPar" class="form-control" formControlName="modifPar" readonly [(ngModel)]="this.myClient.modifPar">
                     </div>
                     <div class="col-md-12 gestionInputs">
                         <label for="modif">Modifié</label>
-                        <input type="text" id="modif" class="form-control" formControlName="modif" readonly>
+                        <input type="text" id="modif" class="form-control" formControlName="modif" readonly [(ngModel)]="this.myClient.modif">
                     </div>
                     <div class="col-md-12 gestionInputs">
                         <label for="dateDernEv">Date Dernier Évènement</label>
-                        <input type="text" id="dateDernEv" class="form-control" formControlName="dateDernEv" readonly>
+                        <input type="text" id="dateDernEv" class="form-control" formControlName="dateDernEv" readonly [(ngModel)]="this.myClient.dateDernEv">
                     </div>
                     <div class="col-md-12 gestionInputs">
                         <label for="creePar">Créé par</label>
@@ -177,6 +184,7 @@ import { Admin } from '../users/admin';
             </div>
         </form>
     </section>
+    
 
     `,
     styles: [`
@@ -244,10 +252,13 @@ export class CreerClientComponent implements OnInit {
     adminFullNom: string;
     date: string;
     myClient : Client;
+    formSoumis:boolean;
 
     constructor(private _formBuilder: FormBuilder, private _clientService: ClientService, private _errorService: ErrorService) {
         //this.date = "";
         this.myClient = new Client();
+        this.formSoumis = false;
+
      }
 
     ngOnInit() { 
@@ -260,7 +271,7 @@ export class CreerClientComponent implements OnInit {
             compagnie: [''],
             adresse: [''],
             ville: [''],
-            codePostal: [''],
+            codePostal: ['', this.estCodePostalOK],
             telPrincipal: [''],
             province: [''],
             pays: [''],
@@ -269,7 +280,7 @@ export class CreerClientComponent implements OnInit {
             memo: [''],
             memoAVenir: [''],
             noExTaxeProv: [''],
-            noExTaxeFéd: [''],
+            noExTaxeFed: [''],
             selectStatut: [''],
             selectSource: [''], 
             modifPar: [''],
@@ -278,19 +289,68 @@ export class CreerClientComponent implements OnInit {
             creePar: [''],
             cree: ['']    
         });
-
+        
         //this.getCreePar();
-
+        //this.testCP();
     }
 
-     private estCourrielOK(control: FormControl): {[chaine: string]: boolean}{
+    formatCP(input){
+        //j'enleve les espaces, globalement
+        var chaine = input.value.replace(/ +/g, "");
+        if(chaine.length > 0){
+            //je place l'espace à la bonne place
+            chaine = chaine.substr(0,3) + " " + chaine.substr(3,3);
+        }
+        //transformer le code Postal en majuscule
+        input.value = chaine.toUpperCase();
+    }
+
+    private testCP(){
+        //retoune null (valide)
+            //console.log(this.estCodePostalOK('H2S 0B5')); //ok
+            //console.log(this.estCodePostalOK('h2s 0b5')); //ok
+            //console.log(this.estCodePostalOK('h2s0b5'));  //ok
+
+        //retourne true (fail)
+            //console.log(this.estCodePostalOK('Z3V H2S')); //Ok
+            //console.log(this.estCodePostalOK('z3vh2s'));  //ok
+            //console.log(this.estCodePostalOK('B3V H2'));  //ok
+    }
+
+    private estCodePostalOK(control: FormControl): ResultatValidation{
+        //validation a réussi: pas de valeur tapée
+        if(!control.value){
+            return null;
+        }
+        /*format regex canadien :
+            ^ : chaine commence, $ : fin séquence
+            lettre : pas de D, F, I, O, Q U
+            1er lettre: pas de W, Z, chiffre: \d, lettre, blanc, chiffre, lettre, chiffre
+        */
+        var regexCP =  /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ][ ]\d[ABCEGHJKLMNPRSTVWXYZ]\d$/;
+        if(!control.value.match(regexCP)){
+            return {codePostalInvalide: true};
+        }
+
+        //validation résussie
+        return null;
+    }
+
+
+    //validation: retourne null si valide et un boolean si erreur.
+     private estCourrielOK(control: FormControl): ResultatValidation{
          if (control.value) {
-            if(!control.value.match("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"))
+            var regexCourriel = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+            if(!control.value.match(regexCourriel))
                 return {courrielInvalide: true};
          }
+
+         //validation résussie
+         return null;
     }
 
     onSubmit(){
+        this.formSoumis = true;
         console.log(this.creerClientForm.value);
         /*const client = new Client(this.creerClientForm.value.prenom, this.creerClientForm.value.nom, this.creerClientForm.value.noCompte, 
             this.creerClientForm.value.courriel, this.creerClientForm.value.cell, this.creerClientForm.value.compagnie, this.creerClientForm.value.adresse,
@@ -319,6 +379,23 @@ export class CreerClientComponent implements OnInit {
         //this.date = this.toDateString(new Date()).slice(0,16);
     }
 
+    /*
+interface ResultatValidation {
+    [cle: string]: boolean;
+}
+*/
+
+
+
+private toDateString(date: Date): string {
+        return (date.getFullYear().toString() + '-' 
+           + ("0" + (date.getMonth() + 1)).slice(-2) + '-' 
+           + ("0" + (date.getDate())).slice(-2)) + " "
+           + date.toTimeString().slice(0,5);
+
+    }
+
+    /*
     getCreePar(){
         //var monObjet_json = localStorage.getItem("token");
         //var monObjet = JSON.parse(monObjet_json);
@@ -340,12 +417,13 @@ export class CreerClientComponent implements OnInit {
             error => this._errorService.handleError(error)
         );
     }
-
-    private toDateString(date: Date): string {
-        return (date.getFullYear().toString() + '-' 
-           + ("0" + (date.getMonth() + 1)).slice(-2) + '-' 
-           + ("0" + (date.getDate())).slice(-2)) + " "
-           + date.toTimeString().slice(0,5);
-
-    }
+    */
+    //[value]="inputCP.value.toUpperCase()" (change)="addSpace(this)"
 }
+
+
+
+
+
+
+

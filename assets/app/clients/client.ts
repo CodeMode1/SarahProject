@@ -16,7 +16,7 @@ export class Client{
     memo: string;
     memoAVenir: String;
     noExTaxeProv: string;
-    noExTaxeFéd: string;
+    noExTaxeFed: string;
     selectStatut: string;
     selectSource: string;
     modifPar: string;
@@ -27,7 +27,7 @@ export class Client{
     
     constructor( prenom?:string, nom?: string, noCompte?: string, courriel?: string, cell?: string, compagnie?:string, adresse?: string, ville?:string,
          codePostal?: string, telPrincipal?: string, province?:string, pays?: string, fax?: string, telSecondaire?:string, memo?: string,
-         memoAVenir?: string, noExTaxeProv?: string, noExTaxeFéd?: string, selectStatut?: string, selectSource?: string, modifPar?: string, modif?: Date, 
+         memoAVenir?: string, noExTaxeProv?: string, noExTaxeFed?: string, selectStatut?: string, selectSource?: string, modifPar?: string, modif?: Date, 
          dateDernEv?: Date, creerPar?: string, dateCree?: Date){
         this.prenom = prenom;
         this.nom = nom;
@@ -46,7 +46,7 @@ export class Client{
         this.memo = memo;
         this.memoAVenir = memoAVenir;
         this.noExTaxeProv = noExTaxeProv;
-        this.noExTaxeFéd = noExTaxeFéd;
+        this.noExTaxeFed = noExTaxeFed;
         this.selectStatut = selectStatut;
         this.selectSource = selectSource;
         this.modifPar = modifPar;

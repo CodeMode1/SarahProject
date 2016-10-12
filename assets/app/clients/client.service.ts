@@ -20,7 +20,7 @@ export class ClientService {
                 const data = response.json().obj;
                 let client = new Client( data.prenom, data.nom, data.noCompte, data.courriel, data.cell, data.compagnie, data.adresse, data.ville,
                     data.codePostal, data.telPrincipal, data.province, data.pays, data.fax, data.telSecondaire, data.memo,
-                    data.memoAVenir, data.noExTaxeProv, data.noExTaxeFéd, data.selectStatut, data.selectSource, data.modifPar, data.modif, 
+                    data.memoAVenir, data.noExTaxeProv, data.noExTaxeFed, data.selectStatut, data.selectSource, data.modifPar, data.modif, 
                     data.dateDernEv, data.creerPar, data.dateCree);                
                 return client;
             })

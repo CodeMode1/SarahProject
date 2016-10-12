@@ -89,7 +89,7 @@ router.post('/', function(req, res, next){
             memo: req.body.memo,
             memoAVenir: req.body.memoAVenir,
             noExTaxeProv: req.body.noExTaxeProv,
-            noExTaxeFéd: req.body.noExTaxeFéd,
+            noExTaxeFed: req.body.noExTaxeFed,
             selectStatut: req.body.selectStatut,
             selectSource: req.body.selectSource,
             modifPar: req.body.modifPar,

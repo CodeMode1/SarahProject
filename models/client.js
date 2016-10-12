@@ -21,7 +21,7 @@ var clientSchema = new Schema({
     memo: { type: String},
     memoAVenir: { type: String},
     noExTaxeProv: { type: String},
-    noExTaxeFéd: { type: String},
+    noExTaxeFed: { type: String},
     selectStatut: { type: String},
     selectSource: { type: String},
     modifPar: { type: String},
