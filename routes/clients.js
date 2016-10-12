@@ -76,17 +76,26 @@ router.post('/', function(req, res, next){
             nom: req.body.nom,
             noCompte: req.body.noCompte,
             courriel: req.body.courriel,
+            cell: req.body.cell,
             compagnie: req.body.compagnie,
             adresse: req.body.adresse,
             ville: req.body.ville,
             codePostal: req.body.codePostal,
-            cell: req.body.cell,
             telPrincipal: req.body.telPrincipal,
             province: req.body.province,
             pays: req.body.pays,
             fax: req.body.fax,
             telSecondaire: req.body.telSecondaire,
-            creerPar: doc.prenom + " " + doc.nom
+            memo: req.body.memo,
+            memoAVenir: req.body.memoAVenir,
+            noExTaxeProv: req.body.noExTaxeProv,
+            noExTaxeFéd: req.body.noExTaxeFéd,
+            selectStatut: req.body.selectStatut,
+            selectSource: req.body.selectSource,
+            modifPar: req.body.modifPar,
+            modif: req.body.modif,
+            dateDernEv: req.body.dateDernEv,
+            creerPar: doc.prenom + " " + doc.nom 
         });
         client.save(function(err, result){
             if(err){
@@ -95,7 +104,7 @@ router.post('/', function(req, res, next){
                     error: err
                 });
             }
-            doc.save();
+            // TODO Nécessaire ?? doc.save();
             res.status(201).json({
                 message: 'client sauvegarder',
                 obj: result

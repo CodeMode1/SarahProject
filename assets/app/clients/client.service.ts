@@ -18,9 +18,10 @@ export class ClientService {
         return this._http.post('http://localhost:3000/client' + token, body, {headers: header})
             .map((response: Response) => {
                 const data = response.json().obj;
-                let client = new Client(data.prenom, data.nom, data.noCompte, data.courriel, data.compagnie,
-                data.adresse, data.ville, data.codePostal, data.cell, data.telPrincipal, data.province, 
-                data.pays, data.fax, data.telSecondaire, data.creerPar);
+                let client = new Client( data.prenom, data.nom, data.noCompte, data.courriel, data.cell, data.compagnie, data.adresse, data.ville,
+                    data.codePostal, data.telPrincipal, data.province, data.pays, data.fax, data.telSecondaire, data.memo,
+                    data.memoAVenir, data.noExTaxeProv, data.noExTaxeFéd, data.selectStatut, data.selectSource, data.modifPar, data.modif, 
+                    data.dateDernEv, data.creerPar, data.dateCree);                
                 return client;
             })
             .catch(error => Observable.throw(error.json() || 'erreur serveur'));

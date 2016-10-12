@@ -22,7 +22,7 @@ import { Admin } from '../users/admin';
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="nom">Nom</label>
-                        <input type="text" id="nom" class="form-control" formControlName="nom" placeholder="name">
+                        <input type="text" id="nom" class="form-control" formControlName="nom" placeholder="name" [(ngModel)]="this.myClient.nom">
                     </div>
                 </div>
                 <div class="col-md-12 outer">
@@ -32,7 +32,7 @@ import { Admin } from '../users/admin';
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="courriel">Courriel</label>
-                        <input type="email" id="courriel" class="form-control" placeholder="my@email.com" formControlName="courriel">
+                        <input type="email" id="courriel" class="form-control" placeholder="my@email.com" formControlName="courriel" [(ngModel)]="this.myClient.courriel">
                     </div>
                 </div>
                 <div class="col-md-12 outer">
@@ -95,11 +95,11 @@ import { Admin } from '../users/admin';
                 <div class="col-md-6 outer">
                     <div class="col-md-12 memo">
                         <label for="labelMemo">Mémo</label>
-                        <textarea id="labelMemo" class="form-control" rows="10"></textarea>
+                        <textarea id="labelMemo" class="form-control" rows="10" formControlName="memo"></textarea>
                     </div>
                     <div class="col-md-12 memo">
                         <label for="labelMess">Message important pour évènement à venir</label>
-                        <textarea id="labelMess" class="form-control" rows="10"></textarea>
+                        <textarea id="labelMess" class="form-control" rows="10" formControlName="memoAVenir"></textarea>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -110,26 +110,6 @@ import { Admin } from '../users/admin';
                     <div class="col-md-12 gestionInputs">
                         <label for="noExTaxeFéd">No exemption taxe fédérale</label>
                         <input type="text" id="noExTaxeFéd" class="form-control" formControlName="noExTaxeFéd">
-                    </div>
-                    <div class="col-md-12 gestionInputs">
-                        <label for="modifPar">Modifié par</label>
-                        <input type="text" id="modifPar" class="form-control" formControlName="modifPar" readonly>
-                    </div>
-                    <div class="col-md-12 gestionInputs">
-                        <label for="modif">Modifié</label>
-                        <input type="text" id="modif" class="form-control" formControlName="modif" readonly>
-                    </div>
-                    <div class="col-md-12 gestionInputs">
-                        <label for="creePar">Créé par</label>
-                        <input type="text" id="creePar" class="form-control" formControlName="creePar" readonly [ngModel]="this.adminFullNom">
-                    </div>
-                    <div class="col-md-12 gestionInputs">
-                        <label for="cree">Créé</label>
-                        <input type="text" id="cree" class="form-control" formControlName="cree" readonly [ngModel]="this.date">
-                    </div>
-                    <div class="col-md-12 gestionInputs">
-                        <label for="dateDernEv">Date Dernier Évènement</label>
-                        <input type="text" id="dateDernEv" class="form-control" formControlName="dateDernEv" readonly>
                     </div>
                     <div class="col-md-12 gestionInputs">
                         <label for="selectStatut">Satut du client</label>
@@ -153,6 +133,26 @@ import { Admin } from '../users/admin';
                             <option>Autres</option>
                         </select>
                     </div>     
+                    <div class="col-md-12 gestionInputs">
+                        <label for="modifPar">Modifié par</label>
+                        <input type="text" id="modifPar" class="form-control" formControlName="modifPar" readonly>
+                    </div>
+                    <div class="col-md-12 gestionInputs">
+                        <label for="modif">Modifié</label>
+                        <input type="text" id="modif" class="form-control" formControlName="modif" readonly>
+                    </div>
+                    <div class="col-md-12 gestionInputs">
+                        <label for="dateDernEv">Date Dernier Évènement</label>
+                        <input type="text" id="dateDernEv" class="form-control" formControlName="dateDernEv" readonly>
+                    </div>
+                    <div class="col-md-12 gestionInputs">
+                        <label for="creePar">Créé par</label>
+                        <input type="text" id="creePar" class="form-control" formControlName="creePar" readonly [(ngModel)]="this.myClient.creerPar">
+                    </div>
+                    <div class="col-md-12 gestionInputs">
+                        <label for="cree">Créé</label>
+                        <input type="text" id="cree" class="form-control" formControlName="cree" readonly [(ngModel)]="this.myClient.dateCree">
+                    </div>
                 </div>
             </section>
             <div class="col-md-12 footer space">
@@ -243,9 +243,11 @@ export class CreerClientComponent implements OnInit {
     creerClientForm: FormGroup;
     adminFullNom: string;
     date: string;
+    myClient : Client;
 
     constructor(private _formBuilder: FormBuilder, private _clientService: ClientService, private _errorService: ErrorService) {
-        this.date = "";
+        //this.date = "";
+        this.myClient = new Client();
      }
 
     ngOnInit() { 
@@ -264,45 +266,57 @@ export class CreerClientComponent implements OnInit {
             pays: [''],
             fax: [''],
             telSecondaire: [''],
+            memo: [''],
+            memoAVenir: [''],
             noExTaxeProv: [''],
             noExTaxeFéd: [''],
+            selectStatut: [''],
+            selectSource: [''], 
             modifPar: [''],
             modif: [''],
-            creePar: [''],
-            cree: [''],
             dateDernEv: [''],
-            selectStatut: [''],
-            selectSource: ['']
+            creePar: [''],
+            cree: ['']    
         });
 
-        this.getCreePar();
+        //this.getCreePar();
 
     }
 
      private estCourrielOK(control: FormControl): {[chaine: string]: boolean}{
-        if(!control.value.match("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"))
-            return {courrielInvalide: true};
+         if (control.value) {
+            if(!control.value.match("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"))
+                return {courrielInvalide: true};
+         }
     }
 
     onSubmit(){
         console.log(this.creerClientForm.value);
-        const client = new Client(this.creerClientForm.value.prenom, this.creerClientForm.value.nom, this.creerClientForm.value.noCompte, 
-            this.creerClientForm.value.courriel, this.creerClientForm.value.compagnie, this.creerClientForm.value.adresse, this.creerClientForm.value.ville,
-            this.creerClientForm.value.codePostal, this.creerClientForm.value.cell, this.creerClientForm.value.telPrincipal, this.creerClientForm.value.province,
-            this.creerClientForm.value.pays, this.creerClientForm.value.fax, this.creerClientForm.value.telSecondaire);
-        console.log('creer Client: ' + client.prenom + " " + client.nom + " " + client.courriel);
-        this._clientService.creerClient(client)
+        /*const client = new Client(this.creerClientForm.value.prenom, this.creerClientForm.value.nom, this.creerClientForm.value.noCompte, 
+            this.creerClientForm.value.courriel, this.creerClientForm.value.cell, this.creerClientForm.value.compagnie, this.creerClientForm.value.adresse,
+            this.creerClientForm.value.ville, this.creerClientForm.value.codePostal, this.creerClientForm.value.telPrincipal, this.creerClientForm.value.province,
+            this.creerClientForm.value.pays, this.creerClientForm.value.fax, this.creerClientForm.value.telSecondaire, this.creerClientForm.value.memo, this.creerClientForm.value.memoAVenir,
+            this.creerClientForm.value.noExTaxeProv, this.creerClientForm.value.noExTaxeFéd, this.creerClientForm.value.selectStatut, this.creerClientForm.value.selectSource,
+            null, null, this.creerClientForm.value.dateDernEv, this.creerClientForm.value.creePar);
+            */
+        console.log('creer Client: ' + this.myClient.prenom + " " + this.myClient.nom + " " + this.myClient.courriel);
+        this._clientService.creerClient(this.myClient)
             .subscribe(
                 data => { 
                     console.log('data du serveur :');
                     console.log(data);
-                    this._clientService.clients.push(data);
+                    //ne fonctionne pas : this._clientService.clients.push(data);
+                    this.myClient = data;
+                    // this.adminFullNom = data.creerPar;
+                    //this.date = data.dateCree;
+                    // TODO Sauver le _id qui revient dans le client créé par Mongo.
+                    // TODO Change mode modification, enable bouton Acutaliser et Copier.
                     alert('Client sauvegarder: ' + <Client>(data.prenom) + " " + <Client>(data.nom));
             },
                 error => this._errorService.handleError(error)
             );
         
-        this.date = this.toDateString(new Date()).slice(0,16);
+        //this.date = this.toDateString(new Date()).slice(0,16);
     }
 
     getCreePar(){

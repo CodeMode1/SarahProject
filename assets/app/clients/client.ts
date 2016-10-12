@@ -3,37 +3,56 @@ export class Client{
     nom: string;
     noCompte: string;
     courriel: string;
+    cell: string;
     compagnie: string; 
     adresse: string;
     ville: string;
     codePostal: string;
-    cell: string;
     telPrincipal: string;
     province: string;
     pays: string;
     fax: string;
     telSecondaire: string;
+    memo: string;
+    memoAVenir: String;
+    noExTaxeProv: string;
+    noExTaxeFéd: string;
+    selectStatut: string;
+    selectSource: string;
+    modifPar: string;
+    modif: Date;
+    dateDernEv: Date;
     creerPar: string;
     dateCree: Date;
     
-    constructor( prenom:string, nom: string, noCompte: string, courriel: string, compagnie:string, adresse: string, ville:string,
-         codePostal: string, cell: string, telPrincipal: string, province:string, pays: string, fax?: string, telSecondaire?:string,
-         creerPar?:string, dateCree?:Date){
+    constructor( prenom?:string, nom?: string, noCompte?: string, courriel?: string, cell?: string, compagnie?:string, adresse?: string, ville?:string,
+         codePostal?: string, telPrincipal?: string, province?:string, pays?: string, fax?: string, telSecondaire?:string, memo?: string,
+         memoAVenir?: string, noExTaxeProv?: string, noExTaxeFéd?: string, selectStatut?: string, selectSource?: string, modifPar?: string, modif?: Date, 
+         dateDernEv?: Date, creerPar?: string, dateCree?: Date){
         this.prenom = prenom;
         this.nom = nom;
         this.noCompte = noCompte;
         this.courriel = courriel;
+        this.cell = cell;
         this.compagnie = compagnie;
         this.adresse = adresse;
         this.ville = ville;
         this.codePostal = codePostal;
-        this.cell = cell;
         this.telPrincipal = telPrincipal;
         this.province = province;
         this.pays = pays;
         this.fax = fax;
         this.telSecondaire = telSecondaire;
+        this.memo = memo;
+        this.memoAVenir = memoAVenir;
+        this.noExTaxeProv = noExTaxeProv;
+        this.noExTaxeFéd = noExTaxeFéd;
+        this.selectStatut = selectStatut;
+        this.selectSource = selectSource;
+        this.modifPar = modifPar;
+        this.modif = modif;
+        this.dateDernEv = dateDernEv;
         this.creerPar = creerPar;
-        this.dateCree = dateCree;
+        this.dateCree = dateCree;   
     }
 }

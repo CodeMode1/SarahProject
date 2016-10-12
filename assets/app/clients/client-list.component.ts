@@ -73,10 +73,6 @@ import { CapitalizePipe } from '../pipes/capitalize.pipe';
             padding: 2%;
         }
 
-
-
-    
-        
     `]
 })
 export class ClientListComponent implements OnInit {
