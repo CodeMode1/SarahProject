@@ -64,7 +64,7 @@ interface ResultatValidation {
                         <label for="codePostal">Code Postal</label>
                         <input type="text" #inputCP (keyup)="formatCP(inputCP)" id="codePostal" class="form-control" formControlName="codePostal" placeholder="postal code" [(ngModel)]="this.myClient.codePostal">
                         <p class="text-danger" [hidden]="creerClientForm.controls.codePostal.valid || (creerClientForm.controls.codePostal.pristine)">
-                            Invalide. D, F, I, O, Q U, W, Z Invalide. Example: H2S 0B5.
+                            Invalide. D, F, I, O, Q, U, W, Z Invalide. Example: H2S 0B5.
                         </p>
                     </div>
                     <div class="col-md-6 form-group">
@@ -158,25 +158,25 @@ interface ResultatValidation {
                     </div>
                     <div class="col-md-12 gestionInputs">
                         <label for="cree">Créé</label>
-                        <input type="text" id="cree" class="form-control" formControlName="cree" readonly [(ngModel)]="this.myClient.dateCree">
+                        <input type="text" id="cree" #dateCree class="form-control" formControlName="cree" readonly [(ngModel)]="this.myClient.dateCree">
                     </div>
                 </div>
             </section>
             <div class="col-md-12 footer space">
                 <div class="col-md-4 divFooter">
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" [disabled]="!formActualiser">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                         Actualiser
                     </button>
                 </div>
                 <div class="col-md-4 divFooter">
-                    <button type="submit" class="btn btn-primary" [disabled]="!creerClientForm.valid">
+                    <button type="submit" class="btn btn-primary" [disabled]="!creerClientForm.valid || !modeSoumission">
                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
                         Enregistrer
                     </button>
                 </div>
                 <div class="col-md-4 divFooter">
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" [disabled]="!formCopie">
                         <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
                         Copie Client
                     </button>
@@ -252,13 +252,16 @@ export class CreerClientComponent implements OnInit {
     adminFullNom: string;
     date: string;
     myClient : Client;
-    formSoumis:boolean;
+    formCopie: boolean;
+    formActualiser: boolean;
+    modeSoumission: boolean;
 
     constructor(private _formBuilder: FormBuilder, private _clientService: ClientService, private _errorService: ErrorService) {
         //this.date = "";
         this.myClient = new Client();
-        this.formSoumis = false;
-
+        this.formActualiser = false;
+        this.formCopie = false;
+        this.modeSoumission = true;
      }
 
     ngOnInit() { 
@@ -297,7 +300,8 @@ export class CreerClientComponent implements OnInit {
     formatCP(input){
         //j'enleve les espaces, globalement
         var chaine = input.value.replace(/ +/g, "");
-        if(chaine.length > 0){
+        //pour ajouter l'espace au 3eme carac
+        if(chaine.length > 3){
             //je place l'espace à la bonne place
             chaine = chaine.substr(0,3) + " " + chaine.substr(3,3);
         }
@@ -350,7 +354,9 @@ export class CreerClientComponent implements OnInit {
     }
 
     onSubmit(){
-        this.formSoumis = true;
+        this.modeSoumission = false;
+        this.formActualiser = true;
+        this.formCopie = true;
         console.log(this.creerClientForm.value);
         /*const client = new Client(this.creerClientForm.value.prenom, this.creerClientForm.value.nom, this.creerClientForm.value.noCompte, 
             this.creerClientForm.value.courriel, this.creerClientForm.value.cell, this.creerClientForm.value.compagnie, this.creerClientForm.value.adresse,
@@ -375,18 +381,11 @@ export class CreerClientComponent implements OnInit {
             },
                 error => this._errorService.handleError(error)
             );
-        
-        //this.date = this.toDateString(new Date()).slice(0,16);
+    
     }
 
-    /*
-interface ResultatValidation {
-    [cle: string]: boolean;
-}
-*/
 
-
-
+/*
 private toDateString(date: Date): string {
         return (date.getFullYear().toString() + '-' 
            + ("0" + (date.getMonth() + 1)).slice(-2) + '-' 
@@ -394,6 +393,7 @@ private toDateString(date: Date): string {
            + date.toTimeString().slice(0,5);
 
     }
+    */
 
     /*
     getCreePar(){
