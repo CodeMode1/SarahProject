@@ -258,6 +258,7 @@ export class CreerClientComponent implements OnInit {
     formCopie: boolean;
     formActualiser: boolean;
     modeSoumission: boolean;
+    clientId: string;
 
     constructor(private _formBuilder: FormBuilder, private _clientService: ClientService, private _errorService: ErrorService) {
         //this.date = "";
@@ -415,6 +416,9 @@ export class CreerClientComponent implements OnInit {
                     console.log(data);
                     //ne fonctionne pas : this._clientService.clients.push(data);
                     this.myClient = data;
+                    console.log("id de"+ data.prenom + " : " + data.clientId);
+                    this.clientId = data.clientId;
+                    console.log(this.clientId);
                     // this.adminFullNom = data.creerPar;
                     //this.date = data.dateCree;
                     // TODO Sauver le _id qui revient dans le client créé par Mongo.
