@@ -62,14 +62,17 @@ interface ResultatValidation {
                 <div class="col-md-12 outer">
                     <div class="col-md-6 form-group">
                         <label for="codePostal">Code Postal</label>
-                        <input type="text" #inputCP (keyup)="formatCP(inputCP)" id="codePostal" class="form-control" formControlName="codePostal" placeholder="postal code" [(ngModel)]="this.myClient.codePostal">
+                        <input type="text" #inputCP (input)="formatCP(inputCP)" id="codePostal" class="form-control" formControlName="codePostal" placeholder="postal code" [(ngModel)]="this.myClient.codePostal">
                         <p class="text-danger" [hidden]="creerClientForm.controls.codePostal.valid || (creerClientForm.controls.codePostal.pristine)">
                             Invalide. D, F, I, O, Q, U, W, Z Invalide. Example: H2S 0B5.
                         </p>
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="telPrincipal">Tél. Principal</label>
-                        <input type="text" id="telPrincipal" class="form-control" formControlName="telPrincipal" placeholder="main #" [(ngModel)]="this.myClient.telPrincipal">
+                        <input type="text" #inputTP (input)="formatTP(inputTP)" id="telPrincipal" class="form-control" formControlName="telPrincipal" placeholder="main #" [(ngModel)]="this.myClient.telPrincipal">
+                        <p class="text-danger" [hidden]="creerClientForm.controls.telPrincipal.valid || (creerClientForm.controls.telPrincipal.pristine)">
+                            Invalide. Tél à 10 chiffres. Example: (514)123-4567.
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-12 outer">
@@ -275,7 +278,7 @@ export class CreerClientComponent implements OnInit {
             adresse: [''],
             ville: [''],
             codePostal: ['', this.estCodePostalOK],
-            telPrincipal: [''],
+            telPrincipal: ['', this.estTelephoneOK],
             province: [''],
             pays: [''],
             fax: [''],
@@ -299,7 +302,7 @@ export class CreerClientComponent implements OnInit {
 
     formatCP(input){
         //j'enleve les espaces, globalement
-        var chaine = input.value.replace(/ +/g, "");
+        var chaine = input.value.replace(/\s+/g, "");
         //pour ajouter l'espace au 3eme carac
         if(chaine.length > 3){
             //je place l'espace à la bonne place
@@ -307,6 +310,28 @@ export class CreerClientComponent implements OnInit {
         }
         //transformer le code Postal en majuscule
         input.value = chaine.toUpperCase();
+    }
+
+    formatTP(input){
+        // j'enleve les espaces et les hyphens, globalement
+        var chaine = input.value.replace(/\s+|\u002D+/g, "");
+        console.log(chaine);
+
+        //au 11eme carac tapé, je reconstruis le tel avec ses bons chiffres 
+        if(chaine.length > 10){
+            chaine = chaine.substr(1,3) + chaine.substr(5,3) + chaine.substr(9,4);
+        }
+
+        //au 10eme carac, je formatte selon (XXX)XXX-XXXX
+        if(chaine.length === 10){
+            chaine = "(" + chaine.substr(0,3) + ")" + chaine.substr(3,3) + "-" + chaine.substr(6,4);
+        }
+        
+        /* si ces if sont inversés, chaine non-formattée
+           car au 10eme carac : 
+           chaine.length > 10 et donc la chaine revient non-formattée.
+        */
+        input.value = chaine;
     }
 
     private testCP(){
@@ -337,6 +362,23 @@ export class CreerClientComponent implements OnInit {
         }
 
         //validation résussie
+        return null;
+    }
+
+    private estTelephoneOK(control: FormControl): ResultatValidation{
+        if(!control.value){
+            return null;
+        }
+        /* format regex canadien:
+           ^ : sequence commence, $ : fin sequence
+           ( , chiffre(x3), ) , chiffre (x3), - , chiffre (x4)
+        */ 
+        var regexTP = /^\u0028\d{3}\u0029\d{3}\u002D\d{4}$/;
+        if(!control.value.match(regexTP)){
+            return {telephoneInvalide: true};
+        }
+        
+        //validation réussie
         return null;
     }
 
