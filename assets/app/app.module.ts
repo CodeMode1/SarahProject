@@ -35,10 +35,13 @@ import { ClientService } from './clients/client.service';
 //pipes
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 
+//nouvelles
+import { NouvellesComponent } from './login/nouvelles.component';
+
 @NgModule({
 declarations: [AppComponent, HeaderComponent, LogoComponent, LoginComponent, HomeComponent, SigninComponent, LogoutComponent, 
     SignupComponent, AuthComponent, ErrorComponent, ClientComponent, ClientsComponent, CreerClientComponent, ClientWidgetsComponent,
-    ClientListComponent, CapitalizePipe], 
+    ClientListComponent, NouvellesComponent, CapitalizePipe], 
 imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule, routing],
 bootstrap: [AppComponent],
 providers: [provide(LocationStrategy, {useClass: HashLocationStrategy}), AuthService, ErrorService, ClientService]

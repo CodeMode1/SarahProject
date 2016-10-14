@@ -1,5 +1,6 @@
 export class Client{
     clientId: string;
+    noClient: number;
     prenom: string;
     nom: string;
     noCompte: string;
@@ -26,11 +27,12 @@ export class Client{
     creerPar: string;
     dateCree: Date;
     
-    constructor( clientId?: string, prenom?:string, nom?: string, noCompte?: string, courriel?: string, cell?: string, compagnie?:string, adresse?: string, ville?:string,
+    constructor( clientId?: string, noClient?: number, prenom?:string, nom?: string, noCompte?: string, courriel?: string, cell?: string, compagnie?:string, adresse?: string, ville?:string,
          codePostal?: string, telPrincipal?: string, province?:string, pays?: string, fax?: string, telSecondaire?:string, memo?: string,
          memoAVenir?: string, noExTaxeProv?: string, noExTaxeFed?: string, selectStatut?: string, selectSource?: string, modifPar?: string, modif?: Date, 
          dateDernEv?: Date, creerPar?: string, dateCree?: Date){
         this.clientId = clientId;
+        this.noClient = noClient;
         this.prenom = prenom;
         this.nom = nom;
         this.noCompte = noCompte;

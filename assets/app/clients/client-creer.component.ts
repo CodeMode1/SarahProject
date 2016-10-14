@@ -416,9 +416,11 @@ export class CreerClientComponent implements OnInit {
                     console.log(data);
                     //ne fonctionne pas : this._clientService.clients.push(data);
                     this.myClient = data;
-                    console.log("id de"+ data.prenom + " : " + data.clientId);
+                    console.log("id de "+ data.nom + " : " + data.clientId);
                     this.clientId = data.clientId;
-                    console.log(this.clientId);
+                    console.log("id de "+ data.nom + " : " + this.clientId);
+                    console.log("no de client : " + data.noClient);
+                    this.myClient.noClient = data.noClient;
                     // this.adminFullNom = data.creerPar;
                     //this.date = data.dateCree;
                     // TODO Sauver le _id qui revient dans le client créé par Mongo.

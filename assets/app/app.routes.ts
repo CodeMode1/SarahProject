@@ -9,7 +9,7 @@ import { CLIENT_ROUTES } from './clients/client.routes';
 
 
 const routes: RouterConfig = ([
-    { path: '', component: HomeComponent },
+    { path: '', component: HomeComponent},
     { path: 'auth', component: AuthComponent, children: ADMIN_ROUTES },
     { path: 'clients', component: ClientsComponent, children: CLIENT_ROUTES}
 ]);

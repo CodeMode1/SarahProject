@@ -2,8 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var mongooseUniqueValidator = require('mongoose-unique-validator');
 var Admin = require('../models/admin');
+var Sequence = require('../models/sequence');
+var genSequence = Sequence.generateurSequence('client');
 
 var clientSchema = new Schema({
+    noClient: { type: Number},
     prenom: { type: String},
     nom: { type: String, required: true, unique: true},
     noCompte: { type: String},
@@ -29,6 +32,14 @@ var clientSchema = new Schema({
     dateDernEv: { type: Date},
     creerPar: { type: String },
     dateCree: { type: Date, default: Date.now }
+});
+
+clientSchema.pre('save', function(next){
+    var doc = this;
+    genSequence.next(function(nextSeq){
+        doc.noClient = nextSeq;
+        next();
+    });
 });
 
 clientSchema.plugin(mongooseUniqueValidator);

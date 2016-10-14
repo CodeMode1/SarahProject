@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
     template: `
         <div class="jumbotron col-md-12">
             <h2>{{title}}</h2>
-            <p><a class="btn btn-primary btn-lg" role="button" href="#nouvelles">Nouvelles</a></p>
+            <p><a class="btn btn-primary btn-lg" role="button">Nouvelles</a></p>
         </div>
         <section class="row col-md-12">
             <div class="container col-md-4">
@@ -22,6 +22,7 @@ import { Component, OnInit } from '@angular/core';
         </section>
         <article id="nouvelles" class="jumbotron col-md-12">
             <h3>{{nouvelles}}</h3>
+            <my-nouvelles></my-nouvelles>
         </article>
     `,
     styles: [`
@@ -58,9 +59,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
     //background-color:#4c4c4c;
-    title: string = "Système Abordable de Réservation et Agenda";
-    nouvelles: string = "Nouvelles";
-    constructor() { }
+    title: string;
+    nouvelles: string;
+    constructor() { 
+        this.title = "Système Abordable de Réservation et Agenda";
+        this.nouvelles = "Nouvelles";
+    }
 
     ngOnInit() { }
 }

@@ -18,7 +18,7 @@ export class ClientService {
         return this._http.post('http://localhost:3000/client' + token, body, {headers: header})
             .map((response: Response) => {
                 const data = response.json().obj;
-                let client = new Client(data._id, data.prenom, data.nom, data.noCompte, data.courriel, data.cell, data.compagnie, data.adresse, data.ville,
+                let client = new Client(data._id, data.noClient, data.prenom, data.nom, data.noCompte, data.courriel, data.cell, data.compagnie, data.adresse, data.ville,
                     data.codePostal, data.telPrincipal, data.province, data.pays, data.fax, data.telSecondaire, data.memo,
                     data.memoAVenir, data.noExTaxeProv, data.noExTaxeFed, data.selectStatut, data.selectSource, data.modifPar, data.modif, 
                     data.dateDernEv, data.creerPar, data.dateCree);                
